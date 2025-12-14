@@ -23,154 +23,26 @@ public class Main {
 
 
     static int checkNeighbor(boolean[][] matrix, int i, int j) {
-        int countAliveNeighbor = 0;
+        int rows = matrix.length;
+        int columns = matrix[0].length;
+        int counter = 0;
 
-        // низ и право
-        if ((i == 0) && (j == 0)) {
-            // Низ
-            if (matrix[i + 1][j]) {
-                countAliveNeighbor++;
-            }
+        int[][] displacement = {
+                {-1, -1}, {-1, 0}, {-1, 1},
+                {0, -1}, {0, 1},
+                {1,-1}, {1, 0}, {1, 1}
+        };
 
-            // Право
-            if (matrix[i][j + 1]) {
-                countAliveNeighbor++;
+        for(int[] dir : displacement){
+            int dirI = i + dir[0];
+            int dirJ = j + dir[1];
+
+            if (dirI >= 0 && dirI < rows && dirJ >= 0 && dirJ < columns) {
+                if (matrix[dirI][dirJ]){
+                    counter++;
+                }
             }
         }
-
-        //лево низ
-        if ((i == 0) && (j == (matrix[1].length - 1))) {
-            // Лево
-            if (matrix[i][j - 1]) {
-                countAliveNeighbor++;
-            }
-
-            // Низ
-            if (matrix[i + 1][j]) {
-                countAliveNeighbor++;
-            }
-        }
-
-        //верх право
-        if ((i == (matrix.length - 1)) && (j == 0)) {
-            // Верх
-            if (matrix[i - 1][j]) {
-                countAliveNeighbor++;
-            }
-
-            // Право
-            if (matrix[i][j + 1]) {
-                countAliveNeighbor++;
-            }
-        }
-
-        // верх лево
-        if ((i == (matrix.length - 1)) && (j == (matrix.length - 1))) {
-            // Верх
-            if (matrix[i - 1][j]) {
-                countAliveNeighbor++;
-            }
-
-            // Лево
-            if (matrix[i][j - 1]) {
-                countAliveNeighbor++;
-            }
-        }
-
-        // лево право низ
-        if ((i == 0) && (j > 0) && (j < (matrix[1].length - 1))) {
-            // Лево
-            if (matrix[i][j - 1]) {
-                countAliveNeighbor++;
-            }
-
-            // Право
-            if (matrix[i][j + 1]) {
-                countAliveNeighbor++;
-            }
-
-            // Низ
-            if (matrix[i + 1][j]) {
-                countAliveNeighbor++;
-            }
-        }
-
-        // верх право низ
-        if ((i > 0) && (i < (matrix.length - 1)) && (j == 0)) {
-            // Верх
-            if (matrix[i - 1][j]) {
-                countAliveNeighbor++;
-            }
-
-            // Право
-            if (matrix[i][j + 1]) {
-                countAliveNeighbor++;
-            }
-
-            // Низ
-            if (matrix[i + 1][j]) {
-                countAliveNeighbor++;
-            }
-        }
-
-        // лево верх низ
-        if ((i > 0) && (i < matrix.length - 1) && (j == matrix[1].length - 1)) {
-            // Лево
-            if (matrix[i][j - 1]) {
-                countAliveNeighbor++;
-            }
-
-            // Верх
-            if (matrix[i - 1][j]) {
-                countAliveNeighbor++;
-            }
-
-            // Низ
-            if (matrix[i + 1][j]) {
-                countAliveNeighbor++;
-            }
-        }
-
-        // лево верх право
-        if ((i == matrix.length - 1) && (j > 0) && (j < (matrix[1].length - 1))) {
-            // Лево
-            if (matrix[i][j - 1]) {
-                countAliveNeighbor++;
-            }
-
-            // Верх
-            if (matrix[i - 1][j]) {
-                countAliveNeighbor++;
-            }
-
-            // Право
-            if (matrix[i][j + 1]) {
-                countAliveNeighbor++;
-            }
-        }
-
-        // все соседи
-        if ((i > 0) && (i < (matrix.length - 1)) && (j > 0) && (j < (matrix[1].length - 1))) {
-            // Верх
-            if (matrix[i - 1][j]) {
-                countAliveNeighbor++;
-            }
-            // Лево
-            if (matrix[i][j - 1]) {
-                countAliveNeighbor++;
-            }
-            // Низ
-            if (matrix[i + 1][j]) {
-                countAliveNeighbor++;
-            }
-            // Право
-            if (matrix[i][j + 1]) {
-                countAliveNeighbor++;
-            }
-        }
-
-        return countAliveNeighbor;
+        return counter;
     }
 }
-
-
